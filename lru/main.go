@@ -125,18 +125,29 @@ func (lru *LRU) put(key string, value int) {
 	lru.m[key] = node
 }
 
+func (lru *LRU) display() {
+	for k, v := range lru.m {
+		fmt.Println("key[", k, "] value[", v.value, "]")
+	}
+	fmt.Println()
+}
+
 func main() {
 	lru := newLRU(2)
 	lru.put("2", 2)
 	fmt.Println(lru.get("2"))
+	lru.display()
 	fmt.Println(lru.get("1"))
 	lru.put("1", 1)
 	lru.put("1", 5)
+	lru.display()
 	fmt.Println(lru.get("1"))
 	fmt.Println(lru.get("2"))
-	lru.put("8", 8)
+	lru.display()
+	lru.put("8", 7)
 	fmt.Println(lru.get("1"))
 	fmt.Println(lru.get("8"))
 	fmt.Println(lru.get("5"))
 	fmt.Println(lru.get("2"))
+	lru.display()
 }
